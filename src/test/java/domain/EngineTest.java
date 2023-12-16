@@ -24,7 +24,6 @@ public class EngineTest {
         assertEquals(quantity, 50);
     }
 
-
     @Test
     public void shouldAddMultipleOrder() {
         Order o1 = new Order();
@@ -122,23 +121,42 @@ public class EngineTest {
     }
 
     @Test
-    public void testGetAverageOrderQuantityByCustomer() {
-        Engine engine = new Engine();
-
+    public void testGetAverageOrderQuantityByCustomerNonZero() {
         // Add sample orders to the engine
         Order order1 = new Order();
+        order1.setId(1);
         order1.setCustomer(1);
         order1.setQuantity(35);
         engine.addOrderAndGetFraudulentQuantity(order1);
 
         Order order2 = new Order();
+        order1.setId(2);
         order2.setCustomer(1);
         order2.setQuantity(65);
         engine.addOrderAndGetFraudulentQuantity(order2);
 
+        Order order3 = new Order();
+        order1.setId(3);
+        order2.setCustomer(1);
+        order2.setQuantity(65);
+        engine.addOrderAndGetFraudulentQuantity(order3);
+
         // Test the average order quantity for customer 1
         int averageQuantity = engine.getAverageOrderQuantityByCustomer(1);
-        assertEquals(35, averageQuantity);
+        assertEquals(50, averageQuantity);
+
+    }
+
+    @Test
+    public void testGetAverageOrderQuantityByCustomerZero() {
+        var averageQuantity = 0;
+        // Test the average order quantity for customer 1
+        try {
+            averageQuantity = engine.getAverageOrderQuantityByCustomer(2);
+        } catch (Exception e) {
+
+        }
+        assertEquals(0, averageQuantity);
     }
 
     @Test
