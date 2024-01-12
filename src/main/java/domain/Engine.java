@@ -14,6 +14,7 @@ public class Engine {
         var sum = 0;
         var count = 0;
 
+
         for (Order oldOrder : orderHistory) {
             if (oldOrder.customer == customer) {
                 sum += oldOrder.quantity;
